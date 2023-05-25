@@ -15,9 +15,79 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+export const getProfiles = `
+  query Profiles($profileId: ProfileId!) {
+    profiles(request: { profileIds: [$profileId], limit: 25 }) {
+      items {
+        id
+        name
+        bio
+        attributes {
+          displayType
+          traitType
+          key
+          value
+        }
+        metadata
+        isDefault
+        picture {
+          ... on NftImage {
+            contractAddress
+            tokenId
+            uri
+            verified
+          }
+          ... on MediaSet {
+            original {
+              url
+              mimeType
+            }
+          }
+          __typename
+        }
+        handle
+        coverPicture {
+          ... on NftImage {
+            contractAddress
+            tokenId
+            uri
+            verified
+          }
+          ... on MediaSet {
+            original {
+              url
+              mimeType
+            }
+          }
+          __typename
+        }
+        ownedBy
+        dispatcher {
+          address
+          canUseRelay
+        }
+        stats {
+          totalFollowers
+          totalFollowing
+          totalPosts
+          totalComments
+          totalMirrors
+          totalPublications
+          totalCollects
+        }
+      }
+      pageInfo {
+        prev
+        next
+        totalCount
+      }
+    }
+  }
+`;
+
 export const getProfile = `
   query Profile {
-    profile(request: { profileId: "0x01" }) {
+    profile(request: {profileId: "0x01"}) {
       id
       name
       bio
