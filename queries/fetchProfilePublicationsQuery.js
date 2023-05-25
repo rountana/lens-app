@@ -1,7 +1,29 @@
 import { gql } from "@apollo/client";
 
 export default gql`
-  query ($request: SingleProfileQueryRequest!) {
+  query (
+    $request: SingleProfileQueryRequest!
+    $publicationsRequest: PublicationsQueryRequest!
+  ) {
+    publications(request: $publicationsRequest) {
+      items {
+        __typename
+        ... on Post {
+          ...PostFields
+        }
+        ... on Comment {
+          ...CommentFields
+        }
+        ... on Mirror {
+          ...MirrorFields
+        }
+      }
+      pageInfo {
+        prev
+        next
+        totalCount
+      }
+    }
     profile(request: $request) {
       id
       name

@@ -21,7 +21,6 @@ export default function Home() {
 
   async function fetchProfiles() {
     try {
-      // const response = client.query(getProfile,{}).toPromise();
       const response = await apolloClient.query({
         query: gql(recommendProfiles),
       });
