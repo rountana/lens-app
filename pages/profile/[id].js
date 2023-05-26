@@ -7,6 +7,7 @@ import Image from "next/image.js";
 import Link from "next/link.js";
 import Post from "@/components/Post.js";
 import fetchProfilePublicationsQuery from "@/queries/fetchProfilePublicationsQuery.js";
+import fetchProfilePublicationEx from "../..fetProfilePublicationEx";
 
 // import Profile from "../../components/Profile.js";
 
